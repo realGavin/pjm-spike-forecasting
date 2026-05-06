@@ -1,15 +1,3 @@
-# PJM Day-Ahead Electricity Price Spike Forecasting
-
-INDENG 290 Energy Analytics team project — Phase 1 (basic version) of
-*Predicting Electricity Price Spikes from Extreme Weather in PJM*.
-
-End-to-end runnable pipeline:
-**fetch data → build info-set-correct feature panel → rolling-origin train/eval
-→ CVaR95 procurement-cost simulation → results report.**
-
-Phase 2 (deferred): LSTM / TCN, EPFtoolbox LEAR, Meteomatics issued forecasts,
-PECO node, event study with fixed effects, ablation studies.
-
 ## 1. Setup
 
 ```bash
