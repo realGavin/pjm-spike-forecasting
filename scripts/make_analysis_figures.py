@@ -35,7 +35,7 @@ def lmp_timeseries(panel: pd.DataFrame, zone: str) -> Path:
     ax.plot(daily.index, daily["max"], lw=0.6, alpha=0.6, label="Daily max LMP")
     ax.axhline(300, color="red", ls="--", lw=0.8, label="$300/MWh threshold")
     ax.set_ylabel("DA LMP ($/MWh)")
-    ax.set_title(f"{zone} — Day-Ahead LMP, daily mean and max (2019–2024)")
+    ax.set_title(f"{zone} - Day-Ahead LMP, daily mean and max (2019–2024)")
     ax.legend(loc="upper left", fontsize=9)
     return _save(fig, f"lmp_timeseries_{zone.lower()}.png")
 
@@ -47,7 +47,7 @@ def lmp_distribution(panel: pd.DataFrame, zone: str) -> Path:
     ax[0].axvline(300, color="red", ls="--", lw=0.8, label="$300 spike")
     ax[0].set_xlabel("LMP ($/MWh)")
     ax[0].set_ylabel("Hours")
-    ax[0].set_title(f"{zone} — LMP histogram (clipped to $500)")
+    ax[0].set_title(f"{zone} - LMP histogram (clipped to $500)")
     ax[0].legend()
 
     if "season_name" in panel.columns:
@@ -71,7 +71,7 @@ def temp_vs_lmp(panel: pd.DataFrame, zone: str) -> Path:
                s=2, alpha=0.15, color="tomato")
     ax.set_xlabel("Temperature 2m (°C)")
     ax.set_ylabel("DA LMP ($/MWh, clipped at $500)")
-    ax.set_title(f"{zone} — Summer DA LMP vs. temperature")
+    ax.set_title(f"{zone} - Summer DA LMP vs. temperature")
     return _save(fig, f"temp_vs_lmp_summer_{zone.lower()}.png")
 
 

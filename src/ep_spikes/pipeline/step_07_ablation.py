@@ -1,4 +1,4 @@
-"""Step 7 (Phase 2): ablation study — market-only vs market+weather vs full feature sets."""
+"""Step 7 (Phase 2): ablation study - market-only vs market+weather vs full feature sets."""
 from __future__ import annotations
 
 import argparse

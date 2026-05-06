@@ -1,4 +1,4 @@
-"""PJM Data Miner 2 fetch — gridstatus-first with direct-REST fallback.
+"""PJM Data Miner 2 fetch - gridstatus-first with direct-REST fallback.
 
 DataMiner2 archives anything older than ~2 years. For archived dates only a
 date range filter is permitted; zone/pnode filters are rejected. Strategy:

@@ -199,7 +199,7 @@ def run_spike_fold(
         best=best_params, preds_dir=out_preds_dir, fig_dir=out_fig_dir,
     ))
 
-    # Phase 2 models — opt in via `extra_models`
+    # Phase 2 models - opt in via `extra_models`
     X_train_i = X_train.fillna(X_train.median())
     X_test_i = X_test.fillna(X_train.median())
 

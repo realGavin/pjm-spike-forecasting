@@ -1,4 +1,4 @@
-"""LEAR — Lasso-Estimated AutoRegressive spike classifier.
+"""LEAR - Lasso-Estimated AutoRegressive spike classifier.
 
 Simplified re-implementation inspired by Lago, Marcjasz, de Schutter & Weron
 (2021) "Forecasting day-ahead electricity prices: A review of state-of-the-art

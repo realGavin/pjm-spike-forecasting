@@ -1,4 +1,4 @@
-"""Price-derived features. Strictly respect `origin` — no post-origin values used."""
+"""Price-derived features. Strictly respect `origin` - no post-origin values used."""
 from __future__ import annotations
 
 import numpy as np

@@ -1,4 +1,4 @@
-"""MLP (multi-layer perceptron) spike classifier — Phase 2 deep-learning baseline.
+"""MLP (multi-layer perceptron) spike classifier - Phase 2 deep-learning baseline.
 
 A fully-connected network on the feature panel stands in for the sequence
 LSTM/TCN from the proposal. Our features already encode temporal context

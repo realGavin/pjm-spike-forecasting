@@ -6,7 +6,7 @@ Expected source filenames in ``data/raw/pjm_csv/``:
     hrl_load_metered_{zone}_{YYYY}.csv
     load_frcstd_hist_{zone}_{YYYY}.csv   (optional)
 
-The column names emitted by DataMiner2's web UI are normalized here — we accept
+The column names emitted by DataMiner2's web UI are normalized here - we accept
 either the snake_case JSON schema or the Title Case UI schema.
 """
 from __future__ import annotations

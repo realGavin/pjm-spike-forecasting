@@ -22,7 +22,7 @@ FIGS = ROOT / "outputs" / "figures"
 def feature_importance_for_node(node: str, fold_train: tuple[str, str]) -> pd.DataFrame | None:
     """Refit XGBoost on the final fold's training window and extract importances.
 
-    Not a strict reproducibility path (we refit rather than serialize) — this is a
+    Not a strict reproducibility path (we refit rather than serialize) - this is a
     lightweight, interpretability-focused post-hoc pass.
     """
     panel_fp = PROC / f"panel_{node.lower()}.parquet"
@@ -88,7 +88,7 @@ def main() -> None:
             continue
         all_imp.append(imp)
         make_bar_figure(imp, FIGS / f"feature_importance_{node.lower()}.png",
-                        f"Top XGBoost features — {node} (train 2021-2023)")
+                        f"Top XGBoost features - {node} (train 2021-2023)")
 
     if all_imp:
         combined = pd.concat(all_imp, ignore_index=True)
