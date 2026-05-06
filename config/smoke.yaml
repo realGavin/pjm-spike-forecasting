@@ -1,0 +1,72 @@
+data:
+  start_date: 2023-04-01
+  end_date: 2023-09-30
+  nodes: [COMED]
+  weather_sites:
+    COMED: {lat: 41.8781, lon: -87.6298, name: chicago}
+  pjm_tz: America/New_York
+  forecast_origin_hour_local: 10
+  storm_states: [ILLINOIS, INDIANA, OHIO]
+
+labels:
+  absolute_threshold: 300.0
+  seasonal_quantile: 0.95
+  season_map:
+    summer: [6, 7, 8]
+    winter: [12, 1, 2]
+    shoulder: [3, 4, 5, 9, 10, 11]
+
+features:
+  price_lags_hours: [24, 48, 168]
+  price_roll_windows_hours: [24, 168]
+  load_lags_hours: [24, 48, 168]
+  storm_windows_hours: [12, 24, 48]
+  weather_hourly_vars:
+    - temperature_2m
+    - apparent_temperature
+    - relative_humidity_2m
+    - precipitation
+    - wind_speed_10m
+    - wind_gusts_10m
+  include_weather_anomaly: true
+  weather_forecast_proxy: realized_obs
+
+models:
+  logistic:
+    C: 1.0
+    penalty: l2
+    max_iter: 2000
+    class_weight: balanced
+  xgb_spike:
+    n_estimators_grid: [200]
+    max_depth_grid: [4]
+    learning_rate_grid: [0.1]
+    subsample: 0.9
+    colsample_bytree: 0.8
+    tree_method: hist
+    eval_metric: aucpr
+    seed: 290
+  xgb_quantile:
+    quantile_alpha: [0.95, 0.99]
+    n_estimators: 200
+    max_depth: 4
+    learning_rate: 0.1
+    tree_method: hist
+    seed: 290
+  cv_n_splits: 3
+  extra_models: [lear, mlp]
+  lear: {max_iter: 5000, n_alphas: 15, seed: 290}
+  mlp: {hidden_layer_sizes: [64, 32], max_iter: 60, seed: 290}
+  lstm: {seq_len: 24, hidden_size: 16, epochs: 3, batch_size: 128, learning_rate: 1.0e-3, seed: 290}
+
+folds:
+  - {train_start: 2023-04-01, train_end: 2023-07-31, test_year: 2023-08--09}
+
+cvar:
+  alpha: 0.95
+  hedge_thresholds: [0.1, 0.2, 0.3]
+  forward_price: 65.0
+
+runtime:
+  log_level: INFO
+  cache: true

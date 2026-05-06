@@ -1,0 +1,16 @@
+.env
+.venv/
+__pycache__/
+*.pyc
+*.pyo
+.ipynb_checkpoints/
+.DS_Store
+data/raw/
+data/interim/
+data/processed/
+outputs/models/
+outputs/predictions/
+outputs/figures/
+outputs/tables/
+outputs/reports/
+.pytest_cache/
