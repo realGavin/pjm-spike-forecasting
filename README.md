@@ -48,21 +48,13 @@ cp .env.example .env
 # Edit .env and set PJM_API_KEY=<your-primary-key from apiportal.pjm.com>
 ```
 
-### Getting the PJM API key
-
-1. Register/sign in at **https://apiportal.pjm.com/** (same PJM Tools account).
-2. **Products** → **Data Miner API** → **Subscribe** (free).
-3. Click your username (top right) → **Profile** → **Your subscriptions**.
-4. Click **Show** next to **Primary key** → copy into `.env`.
-5. If status is "pending approval," wait 1–2 business days.
-
-## 2. Smoke test (3-month subset, <15 min)
+## 2. Smoke test (3-month subset)
 
 ```bash
 ./scripts/run_smoke.sh
 ```
 
-### Using manually-downloaded DataMiner2 CSVs (no API key needed)
+### Using manually-downloaded DataMiner2 CSVs
 
 Download one CSV per year per feed from https://dataminer2.pjm.com/ and drop
 them in `data/raw/pjm_csv/` with these exact filenames:
@@ -82,7 +74,7 @@ python -m ep_spikes.data.pjm_csv_ingest --zone COMED
 ./scripts/run_mvp.sh
 ```
 
-### Before you have any PJM data
+###
 
 Weather (Open-Meteo) and NOAA Storm Events work without auth. To exercise the
 rest of the pipeline on **synthetic PJM data** for smoke-testing, run:
@@ -93,9 +85,6 @@ python scripts/make_synthetic_pjm.py --years 2023 --zone COMED
 ./scripts/run_smoke.sh     # will pick up the synthetic cache
 ```
 
-**Delete `data/raw/pjm/` before switching to real data** — the pipeline treats
-any file already on disk as a cache hit.
-
 Outputs:
 - `data/raw/{pjm,weather,noaa}/` — cached per-year parquet/CSV
 - `data/processed/panel_comed.parquet` — feature panel
@@ -104,7 +93,7 @@ Outputs:
 - `outputs/figures/*.png` — CVaR curves
 - `outputs/reports/mvp_results.md` — rendered report
 
-## 3. Full MVP run (6 years, 3 folds)
+## 3. Full run
 
 ```bash
 ./scripts/run_mvp.sh
@@ -120,7 +109,7 @@ PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 pytest tests/ -q
 The `PYTEST_DISABLE_PLUGIN_AUTOLOAD=1` prefix avoids a click/flask version
 conflict in the global anaconda env when pytest autoloads Dash.
 
-## 5. What it does (mapping to the proposal)
+## 5.
 
 | Proposal spec | Implementation |
 |---|---|
@@ -135,7 +124,7 @@ conflict in the global anaconda env when pytest autoloads Dash.
 | **AUCPR / Brier / reliability** | `eval/metrics.py`, `eval/plots.py` |
 | Business metric: **CVaR95 of daily cost = Σ(L·P)** | `risk/cvar.py::simulate_hedge` |
 
-## 6. Known MVP limitations (flagged in `outputs/reports/mvp_results.md`)
+## 6. Known limitations (flagged in `outputs/reports/mvp_results.md`)
 
 - **Weather proxy.** Open-Meteo archive returns realized observations rather
   than issued-at-d-1 forecasts. This biases AUCPR upward. Phase 2 substitutes
