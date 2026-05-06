@@ -1,4 +1,4 @@
-# PJM Day-Ahead Electricity Price Spike Forecasting (MVP)
+# PJM Day-Ahead Electricity Price Spike Forecasting
 
 INDENG 290 Energy Analytics team project — Phase 1 (basic version) of
 *Predicting Electricity Price Spikes from Extreme Weather in PJM*.
