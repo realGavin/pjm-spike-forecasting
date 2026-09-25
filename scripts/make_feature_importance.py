@@ -13,7 +13,7 @@ import pandas as pd
 
 import xgboost as xgb
 
-ROOT = Path("/Users/xujialin/Desktop/energy/Predicting_Electricity_Price_Spikes")
+ROOT = Path(__file__).resolve().parents[1]
 PROC = ROOT / "data" / "processed"
 TABLES = ROOT / "outputs" / "tables"
 FIGS = ROOT / "outputs" / "figures"

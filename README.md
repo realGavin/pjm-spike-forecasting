@@ -1,7 +1,39 @@
+# pjm-spike-forecasting
+
+Forecast day-ahead electricity price spikes in PJM from weather and market data, then test whether those forecasts cut a power buyer's worst-case costs.
+
+A utility that buys power for its customers pays the day-ahead price every hour. Most hours are cheap, and a few are spikes (here, an hour above $300/MWh or in the top 5% for its season). If the utility knows the day before that a spike is likely, it can lock in power at a fixed forward price instead.
+
+This project builds that forecast and measures what it's worth.
+
+## Results
+
+On held-out years, a hedge triggered by the spike forecast cut the average cost of the worst 5% of days (CVaR95) by:
+
+| Node | 2022 (stress year) | 2023 (mild year) | 2024 |
+|---|---|---|---|
+| COMED | **48.3%** | 11.3% | 21.1% |
+| PECO | **57.7%** | 9.2% | 27.8% |
+
+<img src="docs/figures/cvar_reduction.png" width="720">
+
+- **Where it helps most:** stress years. In mild 2023, prices averaged $27/MWh against a $65 forward strike, so hedging rarely paid off.
+- **Models:** no single model won everywhere. Logistic regression, XGBoost, LEAR (the standard electricity-price benchmark) and an MLP each won some node-year. In the stress year, logistic regression gave the largest cost reduction at both nodes.
+- **Weather:** adding weather and storm features improved spike detection (AUCPR) over price-and-load-only models, most of all in the mixed-regime year.
+
+## How it's built
+
+- **No look-ahead.** Every feature is cut at 10:00 AM Eastern the day before, when a real buyer has to decide. A test corrupts future data and checks that predictions don't change.
+- **Rolling evaluation.** Train on 2019–21 and test on 2022, then roll forward to 2023 and 2024. Spike thresholds are fit on training years only.
+- **Data:** PJM Data Miner 2 (day-ahead prices, metered load, load forecasts), NOAA Storm Events and Open-Meteo weather. The hourly panel covers 2019–2024, with 52,608 rows per node.
+- **Honest limits:** weather uses realized observations rather than the forecasts available at decision time, which flatters the results, and the fixed $65 forward strike simplifies a real forward curve. More under Known MVP limitations below.
+
+Team project for UC Berkeley's Energy Analytics course (IND ENG 290), Spring 2026, with Alex Yu, Jialin Xu and Andrew Lai.
+
 ## 1. Setup
 
 ```bash
-cd /Users/xujialin/Desktop/energy/Predicting_Electricity_Price_Spikes
+cd pjm-spike-forecasting
 
 # Option A: dedicated conda env (recommended for clean Phase 2 builds)
 conda env create -f environment.yml

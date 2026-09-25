@@ -11,7 +11,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 
-ROOT = Path("/Users/xujialin/Desktop/energy/Predicting_Electricity_Price_Spikes")
+ROOT = Path(__file__).resolve().parents[1]
 PROC = ROOT / "data" / "processed"
 TABLES = ROOT / "outputs" / "tables"
 FIGS = ROOT / "outputs" / "figures"
