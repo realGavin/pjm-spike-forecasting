@@ -74,7 +74,7 @@ python -m ep_spikes.data.pjm_csv_ingest --zone COMED
 ./scripts/run_mvp.sh
 ```
 
-###
+### Without PJM data
 
 Weather (Open-Meteo) and NOAA Storm Events work without auth. To exercise the
 rest of the pipeline on **synthetic PJM data** for smoke-testing, run:
